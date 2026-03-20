@@ -2,8 +2,8 @@
 ## Off-Diagonal Aubry-André Systems: Irrational Parameter Dependence
 
 **Author:** Bradley Joseph Downey Jr, Independent Researcher (2026)  
-**Preprint:** [arXiv link — to be added]  
-**Patent:** USPTO Provisional Application (filed 2026)
+**Preprint:** https://doi.org/10.5281/zenodo.19101668
+**Patents:** USPTO 64/008,843 and 64/009,939 (filed March 18, 2026)
 
 ---
 
@@ -93,60 +93,69 @@ N_SIZES = [500, 1000]
 
 ## The Model
 
-Off-diagonal Aubry-André Hamiltonian (open boundary conditions):
+Off-diagonal Aubry-André Hamiltonian (open ## What This Is
 
-```
-H = t * Σ_{n=0}^{N-2} (1 + λ·cos(2π·α·n + φ)) * |n+1><n| + h.c.
-```
+Numerical simulation code comparing irrational modulation parameters
+in the off-diagonal Aubry-André model. Establishes the Spectral Gap
+Resonance (SGR) mechanism governing finite-size localization across
+24 distinct irrational parameters and 2,147 phase realisations.
 
-- t = 1.0 (energy scale)
-- λ/t = 2.0 (transition point, main result)
-- α ∈ {π, φ, √2, e, generic}
-- φ averaged over N_PHASE uniform realisations in [0, 2π)
+**Key finding:** At the localization transition λ/t = 2.0, the choice
+of modulation parameter α substantially affects spectral properties
+at all experimentally relevant finite system sizes. The conventional
+choice α = φ is suboptimal. Engineered irrationals of the form
+[1;K,1,K,...] outperform both π and φ by factors of 1.4× to 3.3×
+in localization length, confirmed at 99% confidence.
 
-Off-diagonal (hopping) modulation is used rather than on-site modulation
-because it preserves chiral symmetry and is physically realistic for
-laser-modulated photonic and quantum systems.
+**Design principle:** For a quasi-periodic device of N elements:
+- N < 50: use K = floor(N/2), α = [1;K,1,K,...]
+- N ≥ 50: use K = N−2, α = [1;K,1,K,...]
 
----
-
-## Three Metrics
-
-**Localization length ξ:**  
-ξ = 1/IPR, where IPR = Σ_j |ψ_j|⁴  
-Averaged over central 10% of eigenstates (near E=0)  
-Higher = better coherence for quantum devices
-
-**Level-spacing r-statistic:**  
-r_n = min(s_n, s_{n+1}) / max(s_n, s_{n+1})  
-Poisson (localized) = 0.386  
-GOE (delocalized) = 0.530  
-π shows r=0.827 at N=3000 — anomalously above GOE ceiling
-
-**Spectral fractal dimension D:**  
-Box-counting dimension of the eigenvalue set  
-D < 1 = Cantor-set-like spectrum  
-π shows D≈0.52-0.55 consistently, others show D=0.27-0.40
+Minimum effective device size: N = 6.
 
 ---
 
-## Falsifiable Predictions
+## Results Summary
 
-This code can directly test:
-
-- **P1:** π/φ ratio > 4.0 at N=5000  
-  → Edit N_SIZES = [5000] and run
-
-- **P2:** D(π) > 0.55, D(φ) < 0.25 at N=5000  
-  → Same run, check frac_dim output
-
-- **P3:** r(π) > 0.80 confirmed with N_phase ≥ 20 at N=3000  
-  → Edit N_PHASE = 20, N_SIZES = [3000] and run
+| N | Best α | vs φ | 99% CI |
+|---|--------|------|--------|
+| 11 | [1;4,1,4,...] ≈ 0.8284 | 1.49× | >1.46× |
+| 20 | [1;10,1,10,...] ≈ 0.9161 | 1.65× | >1.61× |
+| 50 | [1;3,1,3,...] ≈ 0.7913 | 2.43× | >2.38× |
+| 200–1500 | [1;100,1,100,...] ≈ 0.9902 | 1.84–3.18× | confirmed |
 
 ---
 
-## Contact
+## Files
 
-Bradley Joseph Downey Jr  
-Independent Researcher  
-[email]
+- `pi_anomaly_simulation.py` — full simulation, N = 200 to 3000
+- `pi_anomaly_quickstart.py` — 30-second verification run
+- `hsl_preprint_v10.pdf` — full preprint (v2.0)
+- `README.md` — this file
+- `PATENT_NOTICE.md` — patent and license information
+
+---
+
+## Citation
+
+Downey, B.J. (2026). Irrational Modulation Parameter Dependence
+in Aubry-André Systems: Spectral Gap Resonance, Super-GOE Level
+Statistics, and a Scale-Dependent Device Design Principle from
+Continued Fraction Structure. Zenodo v2.0.
+https://doi.org/10.5281/zenodo.19101668
+
+---
+
+## Patent Notice
+
+The methods in this repository are protected under:
+
+- USPTO Provisional Application No. **64/008,843** (filed March 18, 2026)
+  Covers: π modulation parameter advantage, super-GOE level statistics
+
+- USPTO Provisional Application No. **64/009,939** (filed March 18, 2026)
+  Covers: Spectral Gap Resonance mechanism, engineered irrationals
+  [1;K,1,K,...], two-regime design principle, device design method
+
+Academic and non-commercial use permitted without restriction.
+Commercial use requires a license. Contact: freeusevids@gmail.com
